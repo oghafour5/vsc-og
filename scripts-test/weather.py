@@ -2,7 +2,11 @@ import requests
 
 def get_weather(city):
     base_url = f"http://wttr.in/{city}?format=j1"
-    response = requests.get(base_url)
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()  # This will raise an HTTPError if the request failed
     weather_data = response.json()
     return weather_data
 
@@ -19,7 +23,7 @@ def main():
         weather_data = get_weather(city)
         print_weather(weather_data)
     except Exception as e:
-        print("Failed to retrieve weather data. Please check the city name.")
+        print(f"Failed to retrieve weather data. Error: {e}")
 
 if __name__ == "__main__":
     main()
