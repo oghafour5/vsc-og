@@ -31,6 +31,18 @@ Note:
 import requests
 
 def get_weather(city):
+    """
+    Fetches current weather data for a specified city from the wttr.in API.
+    
+    Args:
+        city: Name of the city to retrieve weather information for.
+    
+    Returns:
+        A dictionary containing the parsed JSON weather data.
+    
+    Raises:
+        requests.HTTPError: If the HTTP request to the API fails.
+    """
     base_url = f"http://wttr.in/{city}?format=j1"
     headers = {
         "User-Agent": "Mozilla/5.0"
@@ -41,6 +53,12 @@ def get_weather(city):
     return weather_data
 
 def print_weather(weather_data):
+    """
+    Displays weather information extracted from the provided weather data.
+    
+    Args:
+        weather_data: Parsed JSON data containing weather details for a specific city.
+    """
     print(f"Weather in {weather_data['nearest_area'][0]['areaName'][0]['value']}:")
     print(f"Current condition: {weather_data['current_condition'][0]['weatherDesc'][0]['value']}")
     print(f"Temperature: {weather_data['current_condition'][0]['temp_C']}°C / {weather_data['current_condition'][0]['temp_F']}°F")
@@ -48,6 +66,12 @@ def print_weather(weather_data):
     print(f"Humidity: {weather_data['current_condition'][0]['humidity']}%")
 
 def main():
+    """
+    Runs the command-line interface for fetching and displaying weather information.
+    
+    Prompts the user for a city name, retrieves current weather data using the wttr.in API,
+    and displays the results. Prints an error message if data retrieval fails.
+    """
     city = input("Enter the city name: ")
     try:
         weather_data = get_weather(city)
