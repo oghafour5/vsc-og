@@ -40,13 +40,17 @@ def get_weather(city):
     weather_data = response.json()
     return weather_data
 
-def print_weather(weather_data):
+def print_weather(weather_data: dict) -> None:
+    # Validate weather data structure
+    if not weather_data.get('nearest_area') or not weather_data.get('current_condition'):
+        print("Invalid or incomplete weather data received.")
+        return
+
     print(f"Weather in {weather_data['nearest_area'][0]['areaName'][0]['value']}:")
     print(f"Current condition: {weather_data['current_condition'][0]['weatherDesc'][0]['value']}")
     print(f"Temperature: {weather_data['current_condition'][0]['temp_C']}°C / {weather_data['current_condition'][0]['temp_F']}°F")
     print(f"Feels like: {weather_data['current_condition'][0]['FeelsLikeC']}°C / {weather_data['current_condition'][0]['FeelsLikeF']}°F")
     print(f"Humidity: {weather_data['current_condition'][0]['humidity']}%")
-
 def main():
     city = input("Enter the city name: ")
     try:
