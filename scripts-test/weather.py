@@ -51,14 +51,25 @@ def print_weather(weather_data: dict) -> None:
     print(f"Temperature: {weather_data['current_condition'][0]['temp_C']}°C / {weather_data['current_condition'][0]['temp_F']}°F")
     print(f"Feels like: {weather_data['current_condition'][0]['FeelsLikeC']}°C / {weather_data['current_condition'][0]['FeelsLikeF']}°F")
     print(f"Humidity: {weather_data['current_condition'][0]['humidity']}%")
-def main():
+def main() -> None:
     city = input("Enter the city name: ")
+    if not city.strip():
+        print("City name cannot be empty. Please try again.")
+        return
+
     try:
         weather_data = get_weather(city)
         print_weather(weather_data)
+    except requests.HTTPError as e:
+        print(f"HTTP Error occurred: {e}")
+    except requests.ConnectionError:
+        print("Connection Error: Please check your internet connection.")
+    except requests.Timeout:
+        print("Request timed out. The weather service might be slow or unavailable.")
+    except (ValueError, KeyError) as e:
+        print(f"Data Error: Could not process the weather information: {e}")
     except Exception as e:
-        print(f"Failed to retrieve weather data. Error: {e}")
-
+        print(f"Unexpected error: {e}")
 if __name__ == "__main__":
     main()
 
