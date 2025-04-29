@@ -26,10 +26,22 @@ def view_stocks():
         stocks[stock] = new_price
         print(f"{stock}: ${new_price}")
 
-def buy_stock():
+def buy_stock() -> None:
     global money
-    stock = input("Which stock do you want to buy? ")
-    qty = int(input("How many shares? "))
+    stock = input("Which stock do you want to buy? ").upper()
+    if stock not in stocks:
+        print(f"Stock {stock} not found. Available stocks: {', '.join(stocks.keys())}")
+        return
+
+    try:
+        qty = int(input("How many shares? "))
+        if qty <= 0:
+            print("Quantity must be positive!")
+            return
+    except ValueError:
+        print("Please enter a valid number")
+        return
+
     cost = stocks[stock] * qty
     if money >= cost:
         money -= cost
@@ -39,8 +51,7 @@ def buy_stock():
             portfolio[stock] = qty
         print(f"Bought {qty} shares of {stock}")
     else:
-        print("You broke.")
-
+        print(f"Insufficient funds! You need ${cost} but only have ${money}.")
 def sell_stock():
     global money
     stock = input("Which stock do you want to sell? ")
