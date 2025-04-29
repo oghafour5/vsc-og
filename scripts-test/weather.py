@@ -1,3 +1,33 @@
+"""
+Weather Information Fetcher
+
+This script provides a simple command-line interface to fetch and display current weather information
+for any city using the wttr.in weather API. It retrieves and displays:
+- Current weather conditions
+- Temperature in both Celsius and Fahrenheit
+- "Feels like" temperature
+- Humidity percentage
+
+Usage:
+    python weather.py
+    Then enter the city name when prompted.
+
+Example:
+    Enter the city name: London
+    Weather in London:
+    Current condition: Partly cloudy
+    Temperature: 18°C / 64°F
+    Feels like: 17°C / 63°F
+    Humidity: 65%
+
+Dependencies:
+    - requests: For making HTTP requests to the weather API
+
+Note:
+    The script uses the free wttr.in API service which may have rate limits.
+    Internet connection is required for the script to work.
+"""
+
 import requests
 
 def get_weather(city):
@@ -27,3 +57,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
