@@ -81,7 +81,7 @@ while True:
     elif choice == "4":
         view_portfolio()
     elif choice == "5":
-        print("k bye")
+        print("Thanks for trading! Exiting the application.")
         break
     else:
-        print("wat")
+        print("Invalid option. Please enter a number between 1 and 5.")
