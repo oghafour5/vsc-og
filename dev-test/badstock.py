@@ -1,3 +1,4 @@
+
 # BAD STOCK TRADING APP - DO NOT USE IN REAL LIFE
 
 import random
@@ -12,7 +13,7 @@ stocks = {
 portfolio = {}
 money = 10000
 
-def show_menu():
+def show_menu() -> None:
     print("1. View Stocks")
     print("2. Buy Stock")
     print("3. Sell Stock")
@@ -81,7 +82,7 @@ while True:
     elif choice == "4":
         view_portfolio()
     elif choice == "5":
-        print("Thanks for trading! Exiting the application.")
+        print("k bye")
         break
     else:
-        print("Invalid option. Please enter a number between 1 and 5.")
+        print("wat")
